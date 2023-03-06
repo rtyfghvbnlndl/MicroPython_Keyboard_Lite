@@ -1,6 +1,6 @@
 from machine import Pin
 
-class keybord(object):
+class keyboard(object):
 
     def __init__(self, in_low = [], out_high = []):
         self.IN = []

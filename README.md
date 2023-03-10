@@ -2,8 +2,12 @@
 # MicroPython键盘
 
 ![2](pic/2.jpg)
-ssd1306.py 来自https://github.com/micropython/micropython-lib/blob/58f8bec54d5b3b959247b73a6e8f28e8493bd30b/micropython/drivers/display/ssd1306/ssd1306.py  
-## 例子
+## 功能
++ py_keyboard.py 扫描键盘，返回键值
++ passwd_keyboard.py 实体化的密码保险箱。显示密码&用户名，自动输入密码
++ ssd1306 ssd1306的驱动来自https://github.com/micropython/micropython-lib/blob/58f8bec54d5b3b959247b73a6e8f28e8493bd30b/micropython/drivers/display/ssd1306/ssd1306.py 
++ effect.py 小屏幕用的动画，自带调试代码
+##  单独使用py_keyboard.py的例子
 定义一个有16个键的键盘：  
 + 需要4个GPIO作为IN0-3，另外4个GPIO作为OUT0-3。4x4=16
 + 也可以2个GPIO作为IN0-1，另外8个GPIO作为OUT0-8。2x8=16   

@@ -1,7 +1,12 @@
 
-def web(oled, keyboard):
+def web(oled, keyboard, np):
     from microdot import Microdot
     import network, time
+
+    for i in range(15):
+        np[i]=(0,0,0)
+    np.write()
+
     def do_connect(wlan,ssid, passwd):
         wlan.active(True)
         if not wlan.isconnected():

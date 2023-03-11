@@ -23,7 +23,10 @@ class passwd_ctrl(object):
         id, passwd = self.id_list[self.index], self.passwd_list[self.index]
         return id, passwd
 
-def passwd_keyboard(oled, keyboard, output):
+def passwd_keyboard(oled, keyboard, output, np):
+    for i in range(16):  
+        np[i] = (8*i+64, 256-8*i, 8*i+64) 
+    np.write() 
     passwd_dict = {
         'ID1':'ahgdshdoahdoahscoaugcbaiuidgia698o',
         'ID2':'ahg',
@@ -80,4 +83,5 @@ def passwd_keyboard(oled, keyboard, output):
         elif 9 in code:
             while 9 in keyboard.scan_code():
                 pass
+            oled.fill(0)
             break

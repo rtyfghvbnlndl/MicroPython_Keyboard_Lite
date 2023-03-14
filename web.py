@@ -4,7 +4,7 @@ def web(oled, keyboard, np):
     import network, time
 
     for i in range(15):
-        np[i]=(0,0,0)
+       np[i]=(0,0,0)
     np.write()
 
     def do_connect(wlan,ssid, passwd):
@@ -22,7 +22,7 @@ def web(oled, keyboard, np):
             else:
                 return False
 
-    def connet_by_webserver(wlan):
+    def webserver(wlan):
         ap = network.WLAN(network.AP_IF) 
         ap.config(essid='ESP32_AP')
         ap.active(True)
@@ -31,7 +31,16 @@ def web(oled, keyboard, np):
 
         @app.route('', methods=['GET', 'POST'])
         def index(req):
-            global try_connect
+            with open('index.html', mode='r', encoding='utf-8') as html:
+                return html.read(), 200, {'Content-Type': 'text/html'}
+        
+        @app.route('exit', methods=['GET', 'POST'])
+        def exit_now(req):
+            req.app.shutdown()
+            return 'exit!'
+            
+        @app.route('wifi', methods=['GET', 'POST'])
+        def wifi(req):
             ssid, passwd = None, None
             if req.method == 'POST':
                 ssid = req.form.get('ssid')
@@ -41,34 +50,67 @@ def web(oled, keyboard, np):
                 if do_connect(wlan,ssid,passwd):
                     req.app.shutdown()
                     return 'success'
-                else:
-                    try_connect=True
         
-            with open('index.html', mode='r', encoding='utf-8') as html:
-                if not try_connect:
-                    status = ' '
+            with open('wifi.html', mode='r', encoding='utf-8') as html:
+                return html.read(), 200, {'Content-Type': 'text/html'}
+            
+        @app.route('passwd', methods=['GET', 'POST'])
+        def passwd(req):
+            if req.method == 'POST':
+                with open('passwd_dict', mode='r', encoding='utf-8') as f:
+                    pdict = eval(f.read())
+                name = req.form.get('name')
+                passwd = req.form.get('passwd')
+                try:
+                    exist = int(req.form.get('save'))
+                except:
+                    exist = 1
+                print(name,passwd,exist)
+                if exist:
+                    pdict[name]=passwd
                 else:
-                    status = '<div class="fail">Wifi Connection Failed.</div>'
-                return f'%s{status}' % html.read(), 200, {'Content-Type': 'text/html'}
+                    pdict.pop(name)
+                with open('passwd_dict', mode='w+', encoding='utf-8') as f:
+                    f.write(str(pdict))
+
+            with open('passwd.html', mode='r', encoding='utf-8') as html:
+                return html.read(), 200, {'Content-Type': 'text/html'}
+        
+        @app.route('value', methods=['GET', 'POST'])
+        def value(req):
+            with open('passwd_dict', mode='r', encoding='utf-8') as f:
+                pdict = eval(f.read())
+                xml='<a>'
+                for key,value in pdict.items():
+                    xml+='<object><name>%s</name><passwd>%s</passwd></object>' % (key,value)
+                xml+='</a>'
+                return xml, 200, {'Content-Type': 'text/xml'}
 
         app.run(port=80)
         return ap
 
     oled.fill(0)
-    oled.text('connect ',0,0)
+    oled.text('setting mode ',0,0)
+    oled.text('press key8 ',0,8)
     oled.show()
 
     wlan = network.WLAN(network.STA_IF)
-    try_connect = False
     while True:
         code = keyboard.scan_code()
-        if not wlan.isconnected() and 8 in code:
+        if 8 in code:
             while 8 in keyboard.scan_code():
                 pass
-            ap=connet_by_webserver(wlan)
+            oled.fill(0)
+            oled.text('connect to wifi ',0,0)
+            oled.text('ESP32_AP ',0,8)
+            oled.text('open webpage',0,16)
+            oled.text('192.168.4.1 ',0,24)
+            oled.show()
+            ap=webserver(wlan)
             ap.active(False)
         elif 9 in code:
             while 9 in keyboard.scan_code():
                 pass
+            oled.fill(0)
             break
         time.sleep(0.15)

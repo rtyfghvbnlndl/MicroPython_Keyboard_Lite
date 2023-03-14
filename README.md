@@ -9,6 +9,7 @@
 + effect.py 小屏幕用的动画，自带调试代码
 + piano.py 电子乐器，控制嗡鸣器发出不同频率的声音，对应音符共3个八度
 + autopiaon.py 自动弹一首生日快乐
++ web.py WiFi连接 管理passwd_keyboard.py可读取的密码字典 使用microdot作为webserver
 ##  单独使用py_keyboard.py的例子
 定义一个有16个键的键盘：  
 + 需要4个GPIO作为IN0-3，另外4个GPIO作为OUT0-3。4x4=16

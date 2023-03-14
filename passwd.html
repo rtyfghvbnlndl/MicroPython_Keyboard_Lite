@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <title>Wifi Connection Page</title>
+    <style>
+        h1{
+            text-align: center;
+            font-size: 60px;
+            color: darkgray;
+        }
+        select{
+            text-align: center;
+            font-size: 60px;
+            height: 80px;
+            width: 90%;
+        }
+        input{
+            font-size: 60px;
+            height: 80px;
+            width: 90%;
+        }
+        button{
+            background-color: black;
+            color: rgb(206, 240, 240);
+            font-size: 50px;
+            width: 90%;
+            height:  80px;
+        }
+
+    </style>
+</head>
+<body>
+    <div>
+        <h1>新添加：</h1>
+        <form action="" method="post">
+            <input name="name" >
+            <input name="passwd" >
+            <button type="submit">保存</button>
+        </form>
+    </div>
+    <div id="app">
+        <h1>已保存：</h1>
+        <ul></ul>
+        <a style="font-size: 60px;" href="exit">Exit.</a>
+    </div>
+    <script>
+        xhr = new XMLHttpRequest()
+        xhr.open("GET","value",false)
+        xhr.send()
+        xmldoc = xhr.responseXML
+        object_list = xmldoc.getElementsByTagName('object')
+        for(i=0;i<object_list.length;i++){
+            document.getElementsByTagName('ul')[0].innerHTML+=
+            `<li>
+                <form action="" method="post">
+                    <select name="save">
+                        <option value="1">save</option>
+                        <option value="0">delete</option>
+                    </select>
+                    <input name="name" value="${object_list[i].getElementsByTagName('name')[0].innerHTML}">
+                    <input name="passwd" value="${object_list[i].getElementsByTagName('passwd')[0].innerHTML}"><br>
+                    <button type="submit">submit</button>
+                </form>
+            
+            </li>`
+        }
+
+
+    </script>
+    
+</body>

@@ -15,7 +15,7 @@ buzz.duty(0)
 
 oled.fill(0)
 oled.rotate(False)
-oled.text('keyboard.', 24, 8)
+oled.text('Alpha version', 10, 8)
 oled.show()
 sleep(1)
 oled.fill(0)
@@ -24,15 +24,15 @@ oled.show()
 print('keyboard_size:%ix%i' % (keyboard.out_length,keyboard.in_length))
 
 np = NeoPixel(Pin(10 , Pin.OUT), 16)
-output = UART(1, baudrate=9600, tx=20, rx=21)    
-
-import passwd_keyboard, web, piano, autopiano
+output = UART(1, baudrate=9600, tx=20, rx=21)
+import passwd_keyboard, web, piano, autopiano,numberkeyboard
 
 while True: 
     passwd_keyboard.passwd_keyboard(oled,keyboard,output,np)
     web.web(oled, keyboard,np)
     piano.piano(buzz, keyboard, oled, np)
     autopiano.piano(buzz, keyboard, oled, np)
+    numberkeyboard.board(keyboard,np,output,oled)
     
 
 

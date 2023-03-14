@@ -27,12 +27,8 @@ def passwd_keyboard(oled, keyboard, output, np):
     for i in range(16):  
         np[i] = (8*i+64, 256-8*i, 8*i+64) 
     np.write() 
-    passwd_dict = {
-        'ID1':'ahgdshdoahdoahscoaugcbaiuidgia698o',
-        'ID2':'ahg',
-        'ID3':'',
-        'ID4':'chsdijduhsgydfy'
-    }
+    with open("passwd_dict","r",encoding="utf-8") as f:
+        passwd_dict = eval(f.read())
     import effect
     from time import sleep
     ps = passwd_ctrl(passwd_dict)

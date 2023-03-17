@@ -50,8 +50,8 @@ def passwd_keyboard(oled, keyboard, output, np):
         oled.text(to_show, 0, 16)
         oled.show()
 
-        if 12 in code:
-            while 12 in keyboard.scan_code():
+        if 14 in code:
+            while 14 in keyboard.scan_code():
                 pass
             name, passwd = ps.next()
             oled.fill_rect(0, 8, 127, 31, 0)
@@ -59,8 +59,8 @@ def passwd_keyboard(oled, keyboard, output, np):
             pd_generator = effect.next_index(passwd, 15)
             oled.show()
 
-        elif 8 in code:
-            while 8 in keyboard.scan_code():
+        elif 4 in code:
+            while 4 in keyboard.scan_code():
                 pass
             name, passwd = ps.last()
             oled.fill_rect(0, 8, 127, 31, 0)
@@ -68,16 +68,16 @@ def passwd_keyboard(oled, keyboard, output, np):
             pd_generator = effect.next_index(passwd, 15)
             oled.show()
         
-        elif 4 in code:
-            while 4 in keyboard.scan_code():
+        elif 9 in code:
+            while 9 in keyboard.scan_code():
                 pass
             output.write(passwd.encode('ascii'))
             oled.fill_rect(0, 24, 127, 31, 0)
             oled.text('done!', 0, 24)
             oled.show()
         
-        elif 9 in code:
-            while 9 in keyboard.scan_code():
+        elif 3 in code:
+            while 3 in keyboard.scan_code():
                 pass
             oled.fill(0)
             break

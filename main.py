@@ -4,7 +4,7 @@ from machine import Pin, I2C, UART, PWM
 import ssd1306
 from time import sleep
 
-keyboard = py_keyboard.keyboard((0,1,6,7),(9,8,4,5))
+keyboard = py_keyboard.keyboard([0,1,6,7,5],[9,8,4])
 
 i2c = I2C(scl=Pin(2), sda=Pin(3))
 oled = ssd1306.SSD1306_I2C(128,32,i2c)

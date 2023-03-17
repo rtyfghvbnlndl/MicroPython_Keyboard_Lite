@@ -1,6 +1,6 @@
 # MicroPython_keyboard
 # MicroPython键盘
-
+### <a href='https://oshwhub.com/zumg/keybord_copy'>嘉立创开源（已打样验证）地址</a>
 ![2](pic/2.jpg)
 ## 功能
 + py_keyboard.py 扫描键盘，返回键值

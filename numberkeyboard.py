@@ -2,7 +2,8 @@ def board(keyboard,np,output,display):
     from random import randint
     from time import sleep
 
-    index = ('1','2','3','0','(','.','6','5',"+",None,'9','8','-','4','7')
+    #index = ('1','2','3','0','(','.','6','5',"+",None,'9','8','-','4','7')
+    index = ('7','8','9',None,'+','4','5','6',".",'(','1','3','4','0','-')
 
     display.fill(0)
     display.text('number', 0, 0)
@@ -11,7 +12,7 @@ def board(keyboard,np,output,display):
 
     for i in range(15):
         np[i]=(0,0,0)
-    np[9]=(255,0,0)#退出变红
+    np[3]=(255,0,0)#退出变红
     np.write()
     while True:
         try:
@@ -25,7 +26,7 @@ def board(keyboard,np,output,display):
                 except:
                     print('erro')
             else:
-                while 9 in keyboard.scan_code():
+                while 3 in keyboard.scan_code():
                     pass
                 display.fill(0)
                 break

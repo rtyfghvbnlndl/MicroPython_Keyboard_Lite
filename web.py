@@ -108,8 +108,8 @@ def web(oled, keyboard, np):
             oled.show()
             ap=webserver(wlan)
             ap.active(False)
-        elif 9 in code:
-            while 9 in keyboard.scan_code():
+        elif 3 in code:
+            while 3 in keyboard.scan_code():
                 pass
             oled.fill(0)
             break

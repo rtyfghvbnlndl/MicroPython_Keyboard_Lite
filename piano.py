@@ -4,7 +4,7 @@ def piano(buzz, keyboard, display, np):
     from random import randint
 
     index = (None,262,294,330,349,392,440,494,None,None,None,523,587,659,698,784,880,988,None,None,None,1046,1175,1318,1397,1568,1760,1976,)
-    tans = (-5,-4,-3,None,None,4,3,2,None,None,7,6,None,1,5,)
+    tans = (5,6,7,None,None,1,2,3,4,None,-5,-4,-3)
     volume = (1,5,10,20,100,200,512)
     octave = 0
     duty = 1
@@ -25,25 +25,25 @@ def piano(buzz, keyboard, display, np):
         freq, num = 0, 0
         code = keyboard.scan_code()
         #code = [int(input('a:')),int(input('b:'))]
-        if 12 in code:
+        if 4 in code:
             octave = 0
-        elif 4 in code:
+        elif 9 in code:
             octave =10
-        elif 8 in code:
+        elif 14 in code:
             octave = 20
-        elif 3 in code:
+        elif 13 in code:
             try:
                 duty = volume[volume.index(duty)+1]
             except (IndexError, ValueError):
                 duty = 1
-        if 9 in code:
-            while 9 in keyboard.scan_code():
+        if 3 in code:
+            while 3 in keyboard.scan_code():
                 pass
             buzz.duty(0)
             display.fill(0)
             break
         
-        for keys in (0,1,2,5,6,7,10,11,13,14,):
+        for keys in (0,1,2,5,6,7,8,10,11,12,):
             if keys in code:
                 np[keys]=(randint(0,255), randint(0,255), randint(0,255))
                 try:

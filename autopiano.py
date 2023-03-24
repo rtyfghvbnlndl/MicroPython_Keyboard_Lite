@@ -41,11 +41,11 @@ def piano(buzz, keyboard, display, np):
         code = keyboard.scan_code()
         code.append(next(a_generator))
             
-        if 4 in code:
+        if 14 in code:
             octave = 0
         elif 9 in code:
             octave =10
-        elif 14 in code:
+        elif 4 in code:
             octave = 20
         elif 13 in code:
             try:

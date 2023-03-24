@@ -71,7 +71,7 @@ def web(oled, keyboard, np):
                 else:
                     pdict.pop(name)
                 with open('passwd_dict', mode='w+', encoding='utf-8') as f:
-                    f.write(str(pdict))
+                    f.write(str(pdict))#oled
 
             with open('passwd.html', mode='r', encoding='utf-8') as html:
                 return html.read(), 200, {'Content-Type': 'text/html'}
@@ -114,3 +114,15 @@ def web(oled, keyboard, np):
             oled.fill(0)
             break
         time.sleep(0.15)
+
+
+if __name__ == '__main__':
+    import py_keyboard   
+    from neopixel import NeoPixel
+    from machine import Pin, I2C, UART, PWM
+    import ssd1306
+    i2c = I2C(scl=Pin(2), sda=Pin(3))
+    oled = ssd1306.SSD1306_I2C(128,32,i2c)
+    keyboard = py_keyboard.keyboard([0,1,6,7,5],[9,8,4])
+    np = NeoPixel(Pin(10 , Pin.OUT), 16)
+    web(oled, keyboard, np)

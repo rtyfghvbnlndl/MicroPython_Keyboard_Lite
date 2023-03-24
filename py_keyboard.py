@@ -35,5 +35,16 @@ class keyboard(object):
                 if y_val:
                     output.append(x*self.in_length+y)
         return output
+    
+if __name__ == '__main__':
+    from time import sleep
+    a=keyboard([0,1,6,7,5],[9,8,4])
+    from neopixel import NeoPixel
+    np = NeoPixel(Pin(10 , Pin.OUT), 16)
+    for i in range(16):
+        np[i]=(2,3,4)
+    while True:
+        sleep(0.3)
+        print(a.scan(),a.scan_code())
 
 

@@ -1,4 +1,4 @@
-import py_keyboard
+import py_keyboard   
 from neopixel import NeoPixel
 from machine import Pin, I2C, UART, PWM
 import ssd1306
@@ -15,7 +15,7 @@ buzz.duty(0)
 
 oled.fill(0)
 oled.rotate(False)
-oled.text('Alpha version', 10, 8)
+oled.text('Beta version', 10, 8)
 oled.show()
 sleep(1)
 oled.fill(0)
@@ -28,11 +28,11 @@ output = UART(1, baudrate=9600, tx=20, rx=21)
 import passwd_keyboard, web, piano, autopiano,numberkeyboard
 
 while True: 
-    passwd_keyboard.passwd_keyboard(oled,keyboard,output,np)
-    web.web(oled, keyboard,np)
-    piano.piano(buzz, keyboard, oled, np)
-    autopiano.piano(buzz, keyboard, oled, np)
     numberkeyboard.board(keyboard,np,output,oled)
+    passwd_keyboard.passwd_keyboard(oled,keyboard,output,np)
+    piano.piano(buzz, keyboard, oled, np)
+    #autopiano.piano(buzz, keyboard, oled, np)
+    web.web(oled, keyboard,np)
     
 
 

@@ -3,7 +3,7 @@ def board(keyboard,np,output,display):
     from time import sleep
 
     #index = ('1','2','3','0','(','.','6','5',"+",None,'9','8','-','4','7')
-    index = ('7','8','9',None,'+','4','5','6',".",'(','1','3','4','0','-')
+    index = ('7','8','9',None,'+','4','5','6',".",'(','1','2','3','0','-')
 
     display.fill(0)
     display.text('number', 0, 0)
@@ -17,7 +17,7 @@ def board(keyboard,np,output,display):
     while True:
         try:
             code = keyboard.scan_code()[0]
-            if code != 9:
+            if code != 3:
                 np[code]=(randint(0,255), randint(0,255), randint(0,255))
                 np.write()
                 while code in keyboard.scan_code():

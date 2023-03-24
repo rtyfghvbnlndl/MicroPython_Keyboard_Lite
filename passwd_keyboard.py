@@ -24,7 +24,7 @@ class passwd_ctrl(object):
         return id, passwd
 
 def passwd_keyboard(oled, keyboard, output, np):
-    for i in range(16):  
+    for i in range(15):  
         np[i] = (8*i+64, 256-8*i, 8*i+64) 
     np.write() 
     with open("passwd_dict","r",encoding="utf-8") as f:
@@ -71,7 +71,28 @@ def passwd_keyboard(oled, keyboard, output, np):
         elif 9 in code:
             while 9 in keyboard.scan_code():
                 pass
-            output.write(passwd.encode('ascii'))
+            iteractor = iter(passwd)
+            while True:
+                sleep(0.1)
+                try:
+                    char = next(iteractor)
+                except StopIteration:
+                    break
+                if char == '$':
+                    char_cache = '$'
+                    for key_char in 'enter':
+                        char = next(iteractor) 
+                        char_cache += char
+                        if char == key_char:
+                            pass
+                        else:
+                            break
+                    else:
+                        output.write(b'\x1B')
+                        continue
+                    char = char_cache
+                output.write(char.encode('ascii'))
+                
             oled.fill_rect(0, 24, 127, 31, 0)
             oled.text('done!', 0, 24)
             oled.show()
@@ -81,3 +102,30 @@ def passwd_keyboard(oled, keyboard, output, np):
                 pass
             oled.fill(0)
             break
+
+if __name__ == '__main__':
+    from time import sleep
+    from machine import UART
+    output = UART(1, baudrate=9600, tx=20, rx=21)
+    sleep(2)
+    iteractor = iter('#include <iostream>$enterusing namespace std;$enterint main()$enter{$enter    cout << "Hello, world!" << "\\n";$enter    return 0;$enter')
+    while True:
+        sleep(0.1)
+        try:
+            char = next(iteractor)
+        except StopIteration:
+            break
+        if char == '$':
+            char_cache = '$'
+            for key_char in 'enter':
+                char = next(iteractor) 
+                char_cache += char
+                if char == key_char:
+                    pass
+                else:
+                    break
+            else:
+                output.write(b'\x1B')
+                continue
+            char = char_cache
+        output.write(char.encode('ascii'))

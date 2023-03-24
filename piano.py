@@ -25,11 +25,11 @@ def piano(buzz, keyboard, display, np):
         freq, num = 0, 0
         code = keyboard.scan_code()
         #code = [int(input('a:')),int(input('b:'))]
-        if 4 in code:
+        if 14 in code:
             octave = 0
         elif 9 in code:
             octave =10
-        elif 14 in code:
+        elif 4 in code:
             octave = 20
         elif 13 in code:
             try:

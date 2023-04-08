@@ -3,11 +3,28 @@ from neopixel import NeoPixel
 from machine import Pin, I2C, UART, PWM
 import ssd1306
 from time import sleep
+object
+class ssd1306_(ssd1306.SSD1306_I2C):
+    no_reponse = 0
+    max_no_reponse = 200
+    def timer_run(self):
+        if self.no_reponse<=self.max_no_reponse:
+            self.no_reponse+=1
+    
+    def reset_timer(self):
+        self.no_reponse=0
+    
+    def screen_sleep(self):
+        if self.no_reponse>self.max_no_reponse:
+            self. poweroff()
+        else:
+            self.poweron()
+
 
 keyboard = py_keyboard.keyboard([0,1,6,7,5],[9,8,4])
 
 i2c = I2C(scl=Pin(2), sda=Pin(3))
-oled = ssd1306.SSD1306_I2C(128,32,i2c)
+oled = ssd1306_(128,32,i2c)
 buzz = PWM(Pin(13), duty=0, freq=1000)
 buzz.duty(1)
 sleep(0.3)

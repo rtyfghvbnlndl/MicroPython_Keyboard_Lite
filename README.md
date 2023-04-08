@@ -4,6 +4,7 @@
 ### <a href='https://www.bilibili.com/video/BV19o4y1s7cF'> Bilibili视频</a>
 ![2](pic/2.jpg)
 ## 功能
++ 新增超时关闭屏幕
 + py_keyboard.py 扫描键盘，返回键值
 + passwd_keyboard.py 实体化的密码保险箱。显示密码&用户名，自动输入密码
 + ssd1306 ssd1306的驱动来自https://github.com/micropython/micropython-lib/blob/58f8bec54d5b3b959247b73a6e8f28e8493bd30b/micropython/drivers/display/ssd1306/ssd1306.py 
